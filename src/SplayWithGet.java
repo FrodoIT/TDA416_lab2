@@ -1,3 +1,9 @@
+/**
+ TDA 416 Lab 2
+ Grupp 37
+ Rasmus Tomasson (rastom), Sofia Larborn (soflarb)
+ */
+
 public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearchTree<E> implements CollectionWithGet<E> {
 
     /**

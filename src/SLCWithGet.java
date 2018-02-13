@@ -1,6 +1,8 @@
-import javax.xml.bind.Element;
-import java.util.Collection;
-
+/**
+ TDA 416 Lab 2
+ Grupp 37
+ Rasmus Tomasson (rastom), Sofia Larborn (soflarb)
+ */
 
 public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollection<E> implements CollectionWithGet<E> {
 
