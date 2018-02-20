@@ -52,7 +52,7 @@ public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearch
 
             splay(entry);
 
-            return entry;
+            return root;
         }
         else if(compare < 0){
             if(entry.left == null){

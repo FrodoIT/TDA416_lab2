@@ -35,8 +35,13 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
     private E recursiveGet(E e, Entry entry){
         if(entry == null)return null;
 
-        if(e.compareTo(entry.element) == 0){
+        int comp = e.compareTo(entry.element);
+
+        if(comp == 0) {
             return entry.element;
+        }
+        else if(comp > 0){
+            return null;
         }
         else{
             return recursiveGet(e,entry.next);
