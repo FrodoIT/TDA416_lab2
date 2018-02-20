@@ -36,15 +36,16 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
         if(entry == null)return null;
 
         int comp = e.compareTo(entry.element);
-
+        //if the elements are the same, there's a match
         if(comp == 0) {
             return entry.element;
         }
+        //if the element to find is greater than the one compared to, 
         else if(comp > 0){
-            return null;
+            return recursiveGet(e,entry.next);
         }
         else{
-            return recursiveGet(e,entry.next);
+            return null;
         }
     }
 
@@ -56,10 +57,10 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
      */
     @Override
     public boolean add(E e) {
-
         if(e == null){
             throw new NullPointerException();
         }
+        //if there's no head, or the element to insert is less than head, the new element will become the new head
         if ((head == null) || (e.compareTo(head.element) < 0)){
             head = new Entry(e,head);
             return true;
@@ -74,15 +75,14 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
      * @return head
      */
     private boolean addHelper(E e, Entry current){
-		while (current.next != null)
-		{
-			if( e.compareTo(current.next.element) < 0 ){
-				current.next = new Entry(e, current.next);
-				return true;
-			}
-			current = current.next;
-		}
-		current.next = new Entry(e,null);
-		return true;
+        while (current.next != null){
+            if(e.compareTo(current.next.element) < 0){
+                current.next = new Entry(e, current.next);
+                return true;
+            }
+            current = current.next;
+        }
+        current.next = new Entry(e, null);
+        return true;
     }
 }
