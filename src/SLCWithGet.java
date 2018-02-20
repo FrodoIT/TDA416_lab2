@@ -60,8 +60,11 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
         if(e == null){
             throw new NullPointerException();
         }
-        head = recursiveAdd(e,head);
-        return true;
+        if ((head == null) || (e.compareTo(head.element) < 0)){
+            head = new Entry(e,head);
+            return true;
+        }
+        return addHelper(e,head);
     }
 
     /**
@@ -70,20 +73,16 @@ public class SLCWithGet<E extends Comparable<? super E>> extends LinkedCollectio
      * @param current the current entry to compare to
      * @return head
      */
-    private Entry recursiveAdd(E e, Entry current){
-        //if we encountered a null reference, we should put the element here with a null reference
-        if(current == null){
-            return new Entry(e,null);
-        }
-        //if it is less than the current element, we should put the element here with a reference to the current element
-        else if(e.compareTo(current.element) <= 0) {
-            return new Entry(e,current);
-        }
-        //the element should be put somewhere further ahead
-        else{
-            current.next = recursiveAdd(e,current.next);
-            return current;
-        }
+    private boolean addHelper(E e, Entry current){
+		while (current.next != null)
+		{
+			if( e.compareTo(current.next.element) < 0 ){
+				current.next = new Entry(e, current.next);
+				return true;
+			}
+			current = current.next;
+		}
+		current.next = new Entry(e,null);
+		return true;
     }
-
 }
