@@ -51,18 +51,19 @@ public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearch
         if(compare == 0){
 
             splay(entry);
-
             return root;
         }
         else if(compare < 0){
             if(entry.left == null){
                 splay(entry);
+                return null;
             }
             return find(e,entry.left);
         }
         else {
             if(entry.right == null){
                 splay(entry);
+                return null;
             }
             return find(e,entry.right);
         }
@@ -191,6 +192,7 @@ public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearch
         //y --> C
         Entry a = x.right;
         x.right = y;
+        y.parent = x;
 
         //C --> y
         y.left = z.right;
@@ -201,6 +203,7 @@ public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearch
         //y --> z
         Entry b = y.right;
         y.right = z;
+        z.parent = y;
 
         z.right = a;
         if (z.right != null) {
@@ -249,6 +252,7 @@ public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearch
 
         Entry a = x.left;
         x.left = y;
+        y.parent = x;
 
         //Y<--->D
         y.right = z.left;
@@ -258,6 +262,7 @@ public class SplayWithGet <E extends Comparable<? super E>> extends BinarySearch
 
         Entry b = y.left;
         y.left = z;
+        z.parent = y;
 
         z.left = a;
         if(z.left != null){
